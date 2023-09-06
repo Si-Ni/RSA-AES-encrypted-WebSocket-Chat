@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Server for RSA-Chatbot",
+  "description": "Server for Encrypted-Chat",
   "main": "main.js",
   "scripts": {
     "dev": "nodemon main.js",

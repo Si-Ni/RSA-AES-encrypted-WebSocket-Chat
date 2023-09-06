@@ -23,12 +23,26 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("user-connected", usersObj);
   });
 
-  socket.on("message", (data) => {
+  socket.on("aesKeyGenerated", (data) => {
     if (!users.some((user) => user.id === data.to)) return;
-    io.to(data.to).emit("receivedMessage", {
+    io.to(data.to).emit("receivedAesKey", {
       from: socket.id,
-      encryptedMessage: data.msg,
+      aesKey: data.aesKey,
     });
+  });
+
+  socket.on("sendMessage", (data) => {
+    if (!users.some((user) => user.id === data.to)) return;
+    const message = {
+      from: socket.id,
+      msg: data.msg,
+      iv: data.iv,
+      ...(data.hasOwnProperty("encryptedAesKey")
+        ? { encryptedAesKey: data.encryptedAesKey }
+        : {}),
+    };
+
+    io.to(data.to).emit("receivedMessage", message);
   });
 
   socket.on("disconnect", () => {
