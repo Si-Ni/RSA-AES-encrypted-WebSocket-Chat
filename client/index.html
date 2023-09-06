@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSA-Chat</title>
+  </head>
+  <body>
+    <div
+      style="
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background: white;
+      "
+    >
+      <label for="users">Choose a user:</label>
+      <select style="width: 25%" name="users" id="users"></select>
+
+      <hr />
+
+      <input id="messageInput" type="text" style="width: 50%" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div id="messagesDiv" style="width: 100%; margin-top: 75px"></div>
+
+    <p
+      id="ownId"
+      style="position: fixed; bottom: 0px; right: 10px; background: white"
+    ></p>
+
+    <script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
